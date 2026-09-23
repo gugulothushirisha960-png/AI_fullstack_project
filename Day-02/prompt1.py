@@ -4,8 +4,8 @@ response = ollama.chat(
     messages=[ 
         {
             "role":"user",
-            "content": "Explain machine learing in 40 words"
+            "content": "what is AI" 
         }
     ]
 )
-print(response["message"]["content"]) 
+print(response["message"]["content"])
