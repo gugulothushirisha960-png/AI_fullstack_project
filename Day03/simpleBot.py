@@ -12,7 +12,7 @@ while True:
         },
         {
             "role":"user",
-            "content": "what is AI"
+            "content": question
         }
      ]
     )
