@@ -1,12 +1,26 @@
 import ollama
 import streamlit as st
-st.title("Welcome to ChatBot App!!")
+st.markdown("# My ai chat Application")
+
 with st.sidebar:
+    st.header(":blue[Chat settings]")
+    if st.button("Clear chat🗑️"):
+        st.session_state.msgs = []
+        st.success("chat cleared")
+    personalities = {
+        "kid" : "Answer the question like u are explaining a 5 year old kid. Give answers in  2 line only",
+        "friend" : "Answer the question in friendly . Give answers in 2 lines only"
+    }
+    personality = st.selectbox("select a personality",personalities.keys())
     uploaded_file=st.file_uploader("upload a text file..")
-    if uploaded_file:
-        st.write("FIle uploaded successfully")
-        context=uploaded_file.read().decode("utf-8")
-        st.text(context)
+    try:
+        if uploaded_file:
+           st.write("File uploaded successfully")
+           context=uploaded_file.read().decode("utf-8")
+           if st.button("Display"):
+               st.text(context)
+    except:
+        st.error("file not support")
 if "msgs" not in st.session_state:
     st.session_state.msgs = []
 for msg in st.session_state.msgs:
@@ -23,8 +37,9 @@ if question:
     with st.spinner("Thinking..."):
         response = ollama.chat(
             model="llama3.2:3b",
-            messages=st.session_state.msgs
-        )
+            messages= [
+                {"role" : "system","content": "personalities[personality]"}] + st.session_state.msgs)
+            
     answer = response["message"]["content"]
     st.session_state.msgs.append({
         "role": "assistant",
