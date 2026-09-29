@@ -1,6 +1,6 @@
 import ollama
 import streamlit as st
-st.markdown("# My ai chat Application")
+st.markdown("### WelCome !! ")
 
 with st.sidebar:
     st.header(":blue[Chat settings]")
@@ -8,8 +8,8 @@ with st.sidebar:
         st.session_state.msgs = []
         st.success("chat cleared")
     personalities = {
-        "kid" : "Answer the question like u are explaining a 5 year old kid. Give answers in  2 line only",
-        "friend" : "Answer the question in friendly . Give answers in 2 lines only"
+        "kid 👶🏻" : "Answer the question like u are explaining a 5 year old kid. Give answers in  2 line only",
+        "friend " : "Answer the question in friendly . Give answers in 2 lines only"
     }
     personality = st.selectbox("select a personality",personalities.keys())
     uploaded_file=st.file_uploader("upload a text file..")
